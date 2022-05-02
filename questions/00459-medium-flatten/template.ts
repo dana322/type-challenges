@@ -1,1 +1,5 @@
-type Flatten = any
+type Flatten<T> = T extends [infer F, ...infer Rest]
+  ? F extends any[]
+    ? [...Flatten<F>, ...Flatten<Rest>]
+    : [F, ...Flatten<Rest>]
+  : []
